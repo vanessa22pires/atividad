@@ -51,6 +51,9 @@ if ( isset($_REQUEST["cadastrar"]) )
         include_once("class/usuario.php");
         $u = new usuario();
         $lista = $u->listarusuario();
+       if ($lista != false)
+       {
+       
         echo"
         <table>
             <tr>
@@ -60,8 +63,9 @@ if ( isset($_REQUEST["cadastrar"]) )
             <th>DtNascimento</th>
             <th>Cidade</th>
             <th>Senha</th>
-</tr>";
-            foreach ($lista as $item) {
+             </tr>";
+           
+             foreach ($lista as $item) {
                 echo "
                      <tr>
                          <td> " . $item["nome"] . "</td>
@@ -75,6 +79,10 @@ if ( isset($_REQUEST["cadastrar"]) )
                      </tr>";
             }
        echo  "</table>";
+        }
+        else {
+            echo "ocorreu um erro no sistema,tente novamente mais tarde.";
+        }
 
          ?>
                <a href="areaRestrita.php?nome=vanessa">Voltar</a> 

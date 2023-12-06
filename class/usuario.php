@@ -42,13 +42,23 @@
 
         public function listarusuario()
         {
+            try{
             include("db/conn.php");
+
 
             $sql = "CALL psListarusuario('')";
             $data = $conn->query($sql)->fetchAll();
 
             return $data;
         }
+        catch(exception $e)
+        {
+            return false;
+        }
+    }
+    
+
+
          public function getNome()
         {
             return $this->nome;
@@ -155,13 +165,13 @@
  
         public function autenticarUsuario($_email,$_senha)
         {
-
+            try{
                 include("db/conn.php");
                 $sql = "CALL psLoginUsuario('$_email', '$_senha')";
                 $stmt = $conn->prepare($sql);
 
                 $stmt->execute(); 
-                
+            
                 if ($user = $stmt->fetch()) 
                 {
                     $this->nome = $user["nome"];
@@ -171,15 +181,20 @@
                 {
                     return 0;
                 }
-              
+            }
+              catch (exception $e)
+              {
+                  return false;
+              }
 
         }
-
-
-
-
-
-
     }
+
+
+
+
+
+
+    
 
 ?>
